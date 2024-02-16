@@ -38,6 +38,28 @@ function resolveForm (){
     }
 }
 </script>
+<script>
+    let wrong = 0;
+    let correct = 0;
 
+    function checkAnimal() {
+        const hiddenAnimalInput = document.getElementById("hidden-animal");
+        const guessInput = document.getElementById("guess-animal");
+        const resultElement = document.getElementById("result");
+
+        const hiddenAnimal = hiddenAnimalInput.value.trim();
+        const guess = guessInput.value.trim();
+
+        if (hiddenAnimal === guess) {
+            correct++;
+            alert("Ruff ruff");
+        } else {
+            wrong++;
+            alert("Grrrr");
+        }
+
+        resultElement.innerHTML = `Correct: ${correct}, Wrong: ${wrong}`;
+    }
+</script>
 </body>
 </html> 
