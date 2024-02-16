@@ -1,66 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Animal game</title> 
+    <title>Animal Game</title>
 </head>
 
 <body>
-<h1>Animal game by Varsha</h1>
-
- <h2>Getting input</h2>
-
-<form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
-
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" id="form1_nick" name="form1_nick" autofocus> <br>
-
-    <input type="button" onclick="resolveForm()" value="Get values from form">
-</form>
-
-
-<p id="result">This text will be replaced </p>
-
-<script> 
-
-function resolveForm (){
-    console.log("Getting form values")
-    age = document.getElementById("form1_age").value
-    nick = document.getElementById("form1_nick").value
-    confirmed = confirm("Are these the values? "+age+" and "+nick)
+    <h1>Animal game by Varsha</h1>
     
-    out = document.getElementById("result")
-    if(confirmed){
-        out.innerHTML = "Values were confirmed"
-    } else {
-        out.innerHTML = "Values were not confirmed"
-    }
-}
-</script>
-<script>
-    var wrong = 0;
-    var correct = 0;
+    <form id="animalForm">
+        <label for="hiddenAnimal">The hidden animal type:</label><br>
+        <input type="password" id="hiddenAnimal" value="Chicken"><br><br>
+        <label for="guessAnimal">Guess the animal:</label><br>
+        <input type="text" id="guessAnimal"><br><br>
+        <button type="button" onclick="checkAnimal()">Check the guess</button>
+    </form>
+    <div id="result">CORRECT/WRONG ??</div>
+    <script>
+        let correct = 0;
+        let wrong = 0;
 
-    function checkAnimal() {
-        const hiddenAnimalInput = document.getElementById("hidden-animal");
-        const guessInput = document.getElementById("guess-animal");
-        const resultElement = document.getElementById("result");
+        function checkAnimal() {
+            const hiddenAnimal = document.getElementById('hiddenAnimal').value;
+            const guessAnimal = document.getElementById('guessAnimal').value;
 
-        const hiddenAnimal = hiddenAnimalInput.value.trim();
-        const guess = guessInput.value.trim();
-
-        if (hiddenAnimal === guess) {
-            correct++;
-            alert("Ruff ruff");
-        } else {
-            wrong++;
-            alert("Grrrr");
+            if (hiddenAnimal === guessAnimal) {
+                correct = correct + 1;
+                alert("Ruff ruff");
+            } else {
+                wrong = wrong + 1;
+                alert("Grrrr");
+            }
+            document.getElementById('result').innerHTML = `Correct Guess!!: ${correct}, Wrong Guess!!: ${wrong}`;
         }
-
-        resultElement.innerHTML = `Correct: ${correct}, Wrong: ${wrong}`;
-    }
-</script>
+    </script>
 
 </body>
+
 </html>
