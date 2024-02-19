@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Discount Calculations</title>
+</head>
+<body>
 
+<h1>Discount Calculations by Varsha</h1>
+
+<label for="price">Enter price per:</label>
+<input type="number" id="price" value="10"><br><br>
+
+<label for="count">Enter the number of items:</label>
+<input type="number" id="count" value="9"><br><br>
+
+<label for="reductions">Enter the discount percent:</label>
+<input type="number" id="reductions" value="5"><br><br>
+
+<button onclick="discount()">Show total</button><br><br>
+
+<div id="results"></div>
+
+<script>
+function discount() {
+    var price = document.getElementById("price").value;
+    var number = document.getElementById("count").value;
+    var discount = document.getElementById("reductions").value;
+    var myOutput = "";
+
+    for (var i = 5; i <= 9; i++) {
+        var total = price * number * (100 - discount) / 100;
+        myOutput += i + "% is " + total.toFixed(1) + "; ";
+        discount++;
+    }
+
+    document.getElementById("results").innerHTML = "Totals are: " + myOutput;
+}
+</script>
+
+</body>
+</html>
