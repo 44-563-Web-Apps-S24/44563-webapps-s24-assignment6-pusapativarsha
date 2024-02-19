@@ -34,6 +34,31 @@
             document.getElementById('result').innerHTML = `Correct Guess!!: ${correct}, Wrong Guess!!: ${wrong}`;
         }
     </script>
+    <div id="imageContainer">
+        <img id="selectedImage" src="pisco.jpg" alt="Image 1" width="150" height="150" onclick="selectImage()">
+    </div>
+    
+    <script>
+    var useImage = 1;
+    function selectImage() {
+        switch (useImage) {
+            case 1:
+                document.getElementById('selectedImage').src = 'soju.jpg';
+                useImage = 2;
+                break;
+            case 2:
+                document.getElementById('selectedImage').src = 'amaretto.jpg';
+                useImage = 3;
+                break;
+            case 3:
+                document.getElementById('selectedImage').src = 'pisco.jpg';
+                useImage = 1;
+                break;
+            default:
+                break;
+        }
+    }
+    </script>
 
 </body>
 
