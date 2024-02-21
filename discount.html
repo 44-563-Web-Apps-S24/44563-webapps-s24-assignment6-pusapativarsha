@@ -34,6 +34,23 @@
 
             document.getElementById("results").innerHTML = "Totals are: " + myOutput;
         }
+        function chooseOp() {
+            var price = parseFloat(document.getElementById("price").value);
+            var discount = parseFloat(document.getElementById("reductions").value);
+            var operation = document.querySelector('input[name="operation"]:checked').value;
+
+            var result;
+            if (operation === "sum") {
+                result = price + discount;
+                document.getElementById("results").innerHTML = "Sum of " + price + " and " + discount + " is " + result;
+            } else if (operation === "multiply") {
+                result = price * discount;
+                document.getElementById("results").innerHTML = "Product of " + price + " and " + discount + " is " + result;
+            } else if (operation === "exponent") {
+                result = Math.pow(price, discount);
+                document.getElementById("results").innerHTML = "Exponent of " + price + " raised to " + discount + " is " + result;
+            }
+        }
     </script>
 </body>
 </html>
