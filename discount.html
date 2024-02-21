@@ -1,75 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Discount Calculations</title>
+    <title>Discounts</title>
 </head>
+
 <body>
+    <h1>Akshitha Katyaini Reddy Akkireddy discount calculations </h1>
 
-<h1>Discount Calculations by Varsha</h1>
 
-<label for="price">Enter price per:</label>
-<input type="number" id="price" value="10"><br><br>
-
-<label for="count">Enter the number of items:</label>
-<input type="number" id="count" value="9"><br><br>
-
-<label for="reductions">Enter the discount percent:</label>
-<input type="number" id="reductions" value="5"><br><br>
-
-<button onclick="discount()">Show total</button><br><br>
-
-<div id="results"></div>
-
-<script>
-function discount() {
-    var price = document.getElementById("price").value;
-    var number = document.getElementById("count").value;
-    var discount = document.getElementById("reductions").value;
-    var myOutput = "";
-
-    for (var i = 5; i <= 9; i++) {
-        var total = price * number * (100 - discount) / 100;
-        myOutput += i + "% is " + total.toFixed(1) + "; ";
-        discount++;
-    }
-
-    document.getElementById("results").innerHTML = "Totals are: " + myOutput;
-}
-</script>
-<form id="operationForm">
-    <label><input type="radio" name="operation" value="sum" onclick="chooseOp()">Sum</label><br>
-    <label><input type="radio" name="operation" value="multiply" onclick="chooseOp()">Multiply</label><br>
-    <label><input type="radio" name="operation" value="exponent" onclick="chooseOp()">Exponent</label><br>
-</form>
-
-<div id="results"></div>
-
-<script>
-function chooseOp() {
-    var operation = document.querySelector('input[name="operation"]:checked').value;
-    var price = parseFloat(document.getElementById("price").value);
-    var discount = parseFloat(document.getElementById("discount").value);
-    var result;
-
-    switch (operation) {
-        case "sum":
-            result = price + discount;
-            break;
-        case "multiply":
-            result = price * discount;
-            break;
-        case "exponent":
-            result = Math.pow(price, discount);
-            break;
-        default:
-            result = "Invalid operation";
-            break;
-    }
+    <label for="price">Enter price per:</label>
+    <input type="number" id="price" value="10">
+    <br>
+    <label for="count">Enter the number of items:</label>
+    <input type="number" id="count" value="9">
+    <br>
+    <label for="reductions">Enter the discount percent:</label>
+    <input type="number" id="reductions" value="5">
+    <br>
+    <br>
+    <button type="button" onclick="discount()">Show total</button>
+    <p id="discount">Final discount</p>
+    <br>
+    <form>
+        <label><input type="radio" name="operation" value="sum" onclick="chooseOp()">sum</label>
+        
+        <label><input type="radio" name="operation" value="mult" onclick="chooseOp()">mult</label>
+        
+        <label><input type="radio" name="operation" value="exp" onclick="chooseOp()">exp</label>
+    </form>
+    <br>
+    <div id="result">Total</div>
     
-    document.getElementById("results").innerText = result;
-}
-</script>
-         
+    <script>
+        function discount() {
+            var price = document.getElementById("price").value;
+            var count = document.getElementById("count").value;
+            var discountPercent = document.getElementById("reductions").value;
+            var toShow = "Totals are: ";
+
+            for (var i = 0; i < 5; i++) {
+                var discountRate = parseInt(discountPercent) + i;
+                var total = (price * count) * (1 - discountRate / 100);
+                toShow += discountRate + "% is $" + total.toFixed(2) + "; ";
+            }
+            document.getElementById("discount").innerHTML = toShow;
+        }
+
+        function chooseOp() {
+            var price = parseInt(document.getElementById("price").value);
+            var discount = parseInt(document.getElementById("reductions").value);
+            var selectedOperation = document.querySelector('input[name="operation"]:checked').value;
+
+            var result;
+
+            switch (selectedOperation) {
+                case "sum":
+                    result = price + discount;
+                    document.getElementById("result").innerHTML = "Sum of " + price + " and " + discount + " is " + result;
+                    break;
+                case "mult":
+                    result = price * discount;
+                    document.getElementById("result").innerHTML = "Product of " + price + " and " + discount + " is " + result;
+                    break;
+                case "exp":
+                    result = Math.pow(price, discount);
+                    document.getElementById("result").innerHTML = "Exponent of " + price + " raised to the power of " + discount + " is " + result;
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+
 
 </body>
+
 </html>
