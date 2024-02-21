@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Discount Calculations </title>
+    <title>Discount Calculations</title>
+    <style>
+        .radio-group label {
+            display: inline-block;
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Varsha Pusapati Discount Calculations</h1>
+    <h1>Discount Calculations by Varsha Pusapati</h1>
     <label for="price">Enter price per:</label>
     <input type="number" id="price" value="10"><br><br>
 
@@ -16,7 +22,13 @@
 
     <button onclick="discount()">Show total</button><br><br>
 
-    <div id="results"></div>
+    <div id="results"></div><br><br>
+
+    <form>
+        <label><input type="radio" name="operation" value="sum" onclick="chooseOp()"> Sum</label>
+        <label><input type="radio" name="operation" value="multiply" onclick="chooseOp()"> Multiply</label>
+        <label><input type="radio" name="operation" value="exponent" onclick="chooseOp()"> Exponent</label>
+    </form>
 
     <script>
         function discount() {
@@ -34,6 +46,7 @@
 
             document.getElementById("results").innerHTML = "Totals are: " + myOutput;
         }
+
         function chooseOp() {
             var price = parseFloat(document.getElementById("price").value);
             var discount = parseFloat(document.getElementById("reductions").value);
