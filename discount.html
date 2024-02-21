@@ -1,79 +1,39 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Discounts</title>
+    <title>Discount Calculations </title>
 </head>
-
 <body>
-    <h1> </h1>
-
-
+    <h1>Varsha Pusapati Discount Calculations</h1>
     <label for="price">Enter price per:</label>
-    <input type="number" id="price" value="10">
-    <br>
+    <input type="number" id="price" value="10"><br><br>
+
     <label for="count">Enter the number of items:</label>
-    <input type="number" id="count" value="9">
-    <br>
+    <input type="number" id="count" value="9"><br><br>
+
     <label for="reductions">Enter the discount percent:</label>
-    <input type="number" id="reductions" value="5">
-    <br>
-    <br>
-    <button type="button" onclick="discount()">Show total</button>
-    <p id="discount">Final discount</p>
-    <br>
-    <form>
-        <label><input type="radio" name="operation" value="sum" onclick="chooseOp()">sum</label>
-        
-        <label><input type="radio" name="operation" value="mult" onclick="chooseOp()">mult</label>
-        
-        <label><input type="radio" name="operation" value="exp" onclick="chooseOp()">exp</label>
-    </form>
-    <br>
-    <div id="result">Total</div>
-    
+    <input type="number" id="reductions" value="5"><br><br>
+
+    <button onclick="discount()">Show total</button><br><br>
+
+    <div id="results"></div>
+
     <script>
         function discount() {
             var price = document.getElementById("price").value;
             var count = document.getElementById("count").value;
-            var discountPercent = document.getElementById("reductions").value;
-            var toShow = "Totals are: ";
+            var reductions = document.getElementById("reductions").value;
+            var myOutput = "";
 
-            for (var i = 0; i < 5; i++) {
-                var discountRate = parseInt(discountPercent) + i;
-                var total = (price * count) * (1 - discountRate / 100);
-                toShow += discountRate + "% is $" + total.toFixed(2) + "; ";
+            for (var i = 5; i <= 9; i++) {
+                var discountAmount = price * (reductions / 100);
+                var discountedPrice = price - discountAmount;
+                var totalCost = discountedPrice * count;
+                myOutput += i + "% is " + totalCost + "; ";
             }
-            document.getElementById("discount").innerHTML = toShow;
-        }
 
-        function chooseOp() {
-            var price = parseInt(document.getElementById("price").value);
-            var discount = parseInt(document.getElementById("reductions").value);
-            var selectedOperation = document.querySelector('input[name="operation"]:checked').value;
-
-            var result;
-
-            switch (selectedOperation) {
-                case "sum":
-                    result = price + discount;
-                    document.getElementById("result").innerHTML = "Sum of " + price + " and " + discount + " is " + result;
-                    break;
-                case "mult":
-                    result = price * discount;
-                    document.getElementById("result").innerHTML = "Product of " + price + " and " + discount + " is " + result;
-                    break;
-                case "exp":
-                    result = Math.pow(price, discount);
-                    document.getElementById("result").innerHTML = "Exponent of " + price + " raised to the power of " + discount + " is " + result;
-                    break;
-                default:
-                    break;
-            }
+            document.getElementById("results").innerHTML = "Totals are: " + myOutput;
         }
     </script>
-
-
 </body>
-
 </html>
