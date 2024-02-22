@@ -3,63 +3,112 @@
 
 <head>
     <title>Animal Game</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #animalForm {
+            margin-bottom: 20px;
+        }
+
+        #result {
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #imageContainer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #selectedImage {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Animal game by Varsha</h1>
-    
-    <form id="animalForm">
-        <label for="hiddenAnimal">The hidden animal type:</label><br>
-        <input type="password" id="hiddenAnimal" value="Chicken"><br><br>
-        <label for="guessAnimal">Guess the animal:</label><br>
-        <input type="text" id="guessAnimal"><br><br>
-        <button type="button" onclick="checkAnimal()">Check the guess</button>
-    </form>
-    <div id="result">CORRECT/WRONG ??</div>
+    <div class="container">
+        <h1>Animal Game by Varsha</h1>
+
+        <form id="animalForm">
+            <div class="form-group">
+                <label for="hiddenAnimal">The hidden animal type:</label>
+                <input type="password" class="form-control" id="hiddenAnimal" value="Chicken">
+            </div>
+            <div class="form-group">
+                <label for="guessAnimal">Guess the animal:</label>
+                <input type="text" class="form-control" id="guessAnimal">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="checkAnimal()">Check the guess</button>
+        </form>
+
+        <div id="guessResults" class="alert alert-info">Correct Guesses: 0, Wrong Guesses: 0</div>
+
+        <div id="imageContainer">
+            <img id="selectedImage" src="pisco.jpg" alt="Image 1" width="150" height="150" onclick="selectImage()">
+        </div>
+
+        <button id="changeImageButton" class="btn btn-secondary" onclick="selectImage()">Change Image</button>
+    </div>
+
+    <!-- Bootstrap JS (optional if you need Bootstrap features) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
-        let correct = 0;
-        let wrong = 0;
+        let correctGuesses = 0;
+        let wrongGuesses = 0;
 
         function checkAnimal() {
             const hiddenAnimal = document.getElementById('hiddenAnimal').value;
             const guessAnimal = document.getElementById('guessAnimal').value;
 
             if (hiddenAnimal === guessAnimal) {
-                correct = correct + 1;
+                correctGuesses++;
+                document.getElementById('guessResults').innerHTML = `Correct Guesses: ${correctGuesses}, Wrong Guesses: ${wrongGuesses}`;
                 alert("Ruff ruff");
             } else {
-                wrong = wrong + 1;
+                wrongGuesses++;
+                document.getElementById('guessResults').innerHTML = `Correct Guesses: ${correctGuesses}, Wrong Guesses: ${wrongGuesses}`;
                 alert("Grrrr");
             }
-            document.getElementById('result').innerHTML = `Correct Guess!!: ${correct}, Wrong Guess!!: ${wrong}`;
+
+            // Disable the button if wrong guesses exceed correct guesses
+            if (wrongGuesses > correctGuesses) {
+                document.getElementById('changeImageButton').disabled = true;
+                alert("Sorry, too many wrong guesses.");
+            }
+        }
+
+        var useImage = 1;
+
+        function selectImage() {
+            switch (useImage) {
+                case 1:
+                    document.getElementById('selectedImage').src = 'soju.jpg';
+                    useImage = 2;
+                    break;
+                case 2:
+                    document.getElementById('selectedImage').src = 'amaretto.jpg';
+                    useImage = 3;
+                    break;
+                case 3:
+                    document.getElementById('selectedImage').src = 'pisco.jpg';
+                    useImage = 1;
+                    break;
+                default:
+                    break;
+            }
         }
     </script>
-    <div id="imageContainer">
-        <img id="selectedImage" src="pisco.jpg" alt="Image 1" width="150" height="150" onclick="selectImage()">
-    </div>
-    
-    <script>
-    var useImage = 1;
-    function selectImage() {
-        switch (useImage) {
-            case 1:
-                document.getElementById('selectedImage').src = 'soju.jpg';
-                useImage = 2;
-                break;
-            case 2:
-                document.getElementById('selectedImage').src = 'amaretto.jpg';
-                useImage = 3;
-                break;
-            case 3:
-                document.getElementById('selectedImage').src = 'pisco.jpg';
-                useImage = 1;
-                break;
-            default:
-                break;
-        }
-    }
-    </script>
-      <button onclick="selectImage()">Change Image</button>
 </body>
 
 </html>
