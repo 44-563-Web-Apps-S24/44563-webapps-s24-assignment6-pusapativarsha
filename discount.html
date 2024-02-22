@@ -31,6 +31,9 @@
     </form>
 
     <script>
+        let correctGuesses = 0;
+        let wrongGuesses = 0;
+
         function discount() {
             var price = document.getElementById("price").value;
             var count = document.getElementById("count").value;
@@ -45,6 +48,11 @@
             }
 
             document.getElementById("results").innerHTML = "Totals are: " + myOutput;
+
+            // Check if wrong guesses exceed correct guesses
+            if (wrongGuesses > correctGuesses) {
+                alert("Sorry, too many wrong guesses.");
+            }
         }
 
         function chooseOp() {
