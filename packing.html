@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packing</title>
+</head>
+<body>
+    <header>
+        <h1>Varsha Pusapati Packs for a Trip</h1>
+    </header>
+
+    <form id="packingForm">
+        <div class="form-group">
+            <label for="checkbox1">
+                <input type="checkbox" id="checkbox1" name="packLight" value="True"> Pack light
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="checkbox2">
+                <input type="checkbox" id="checkbox2" name="carryOn" value="True"> Carry on
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="checkbox3">
+                <input type="checkbox" id="checkbox3" name="tablet" value="False"> Tablet
+            </label>
+        </div>
+    </form>
+    <br>
+    <button onclick="selectPack()">Select for packing</button>
+    
+    <div id="results"></div>
+    <br>
+    <form id="updateForm">
+        <div class="form-group">
+            <label for="travelMonth">Enter travel month:</label>
+            <input type="text" id="travelMonth" name="travelMonth" value="May">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="price">Enter price:</label>
+            <input type="text" id="price" name="price">
+        </div>
+        <br>
+        <button onclick="updatePack()">Update the pack</button>
+    </form>
+
+    <script>
+        let my_pack = {};
+
+        function selectPack() {
+            my_pack = {};
+            my_pack.light = document.getElementById("checkbox1").checked;
+            my_pack.carry = document.getElementById("checkbox2").checked;
+            my_pack.tablet = document.getElementById("checkbox3").checked;
+            document.getElementById("results").innerHTML = JSON.stringify(my_pack);
+        }
+
+        function updatePack() {
+            const month = document.getElementById("travelMonth").value;
+            const price = document.getElementById("price").value;
+            my_pack["travelMonth"] = month;
+            my_pack["price"] = price;
+            document.getElementById("results").innerHTML = JSON.stringify(my_pack);
+        }
+    </script>
+</body>
+</html>
