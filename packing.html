@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <head>
-    <title>Packing</title>
+    <title>PackING</title>
 </head>
 <body>
-    <header>
         <h1>Varsha Pusapati Packs for a Trip</h1>
-    </header>
-
-    <form id="packingForm">
+    <form id="packingForm" class="mt-5">
         <div class="form-group">
             <label for="checkbox1">
                 <input type="checkbox" id="checkbox1" name="packLight" value="True"> Pack light
@@ -25,33 +22,58 @@
         </div>
     </form>
     <br>
-    <button onclick="selectPack()">Select for packing</button>
+    <button onclick="selectPack()" class="btn btn-primary">Select for packing</button>
     
-    <div id="results"></div>
+    <div id="results" class="mt-3"></div>
     <br>
-    <form id="updateForm">
+    <form id="updateForm" class="mt-5">
         <div class="form-group">
             <label for="travelMonth">Enter travel month:</label>
-            <input type="text" id="travelMonth" name="travelMonth" value="May">
+            <input type="text" id="travelMonth" name="travelMonth" value="May" class="form-control">
         </div>
         <br>
         <div class="form-group">
             <label for="price">Enter price:</label>
-            <input type="text" id="price" name="price">
+            <input type="text" id="price" name="price" class="form-control">
         </div>
         <br>
-        <button onclick="updatePack()">Update the pack</button>
+        <button onclick="updatePack()" class="btn btn-success">Update the pack</button>
     </form>
-
     <script>
         let my_pack = {};
+        let correctGuesses = 0;
+        let wrongGuesses = 0;
 
         function selectPack() {
             my_pack = {};
             my_pack.light = document.getElementById("checkbox1").checked;
             my_pack.carry = document.getElementById("checkbox2").checked;
             my_pack.tablet = document.getElementById("checkbox3").checked;
-            document.getElementById("results").innerHTML = JSON.stringify(my_pack);
+
+            if (my_pack.light && my_pack.carry && !my_pack.tablet) {
+                correctGuesses++;
+            } else {
+                wrongGuesses++;
+            }
+
+            updateGuesses();
+        }
+
+        function updateGuesses() {
+            const guessesDiv = document.getElementById("results");
+            guessesDiv.innerHTML = `
+                <p>Correct Guesses: ${correctGuesses}</p>
+                <p>Wrong Guesses: ${wrongGuesses}</p>
+            `;
+
+            if (wrongGuesses > correctGuesses) {
+                const button = document.querySelector('button');
+                button.setAttribute('onclick', 'tooManyWrongGuesses()');
+            }
+        }
+
+        function tooManyWrongGuesses() {
+            alert("Sorry, too many wrong guesses.");
         }
 
         function updatePack() {
@@ -59,7 +81,7 @@
             const price = document.getElementById("price").value;
             my_pack["travelMonth"] = month;
             my_pack["price"] = price;
-            document.getElementById("results").innerHTML = JSON.stringify(my_pack);
+            document.getElementById("results").innerHTML = JSON.stringify(my_pack, null, 2);
         }
     </script>
 </body>
